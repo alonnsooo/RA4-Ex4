@@ -1,0 +1,23 @@
+name: CI Windows - Compilació i Proves
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Clonar repositori
+      uses: actions/checkout@v2
+
+    - name: Instal·lar MinGW per compilar C
+      run: choco install mingw --version=8.1.0
+
+    - name: Verificar instal·lació
+      run: gcc --version
+
+    - name: Compilar el programa
+      run: gcc -o programa.exe main.c
+
+    - name: Executar proves
+      run: ./programa.exe
